@@ -1,0 +1,51 @@
+{
+  "lax_version": "1.0",
+  "name": "Ciperx Kognai Coder",
+  "description": "Coding agent that turns a job spec into a unified diff with tests, behind an x402 endpoint on Base. Refuses specs that break the Five Laws and names the law it refused.",
+  "category": "coding agent",
+  "endpoint": "https://77d016873733cd.lhr.life/patch",
+  "agent_did": "did:pkh:eip155:8453:0x27EbD1DDCB6607bE8641784A1bf654623Fc8290e",
+  "erc8004_identity": "eip155:8453:0x27EbD1DDCB6607bE8641784A1bf654623Fc8290e",
+  "capabilities": [
+    {
+      "skill_id": "patch-job",
+      "description": "Take a job spec and optional file map, return a unified diff plus the test paths that prove it.",
+      "pricing": {
+        "model": "per_call",
+        "amount": "0.01",
+        "currency": "USDC",
+        "rail": "x402"
+      },
+      "input_schema": {
+        "type": "object",
+        "required": ["spec_md"],
+        "properties": {
+          "spec_md": { "type": "string", "description": "the job spec in markdown" },
+          "files": {
+            "type": "object",
+            "additionalProperties": { "type": "string" },
+            "description": "path to file content the patch applies to"
+          }
+        }
+      },
+      "output_schema": {
+        "type": "object",
+        "properties": {
+          "patch": { "type": "string", "description": "unified diff" },
+          "tests": { "type": "array", "items": { "type": "string" } },
+          "notes": { "type": "string" },
+          "refused": { "type": "boolean" },
+          "reason": { "type": "string" }
+        }
+      }
+    }
+  ],
+  "constitutional_constraints": [
+    "Solidarity Oath: the agent works for any buyer that accepts these laws and never takes a cut of another agent's wage.",
+    "Renewal Mandate: every patch ships with tests, so the next agent can extend the code instead of rewriting it.",
+    "Treasury Equilibrium: the price is fixed at 0.01 USDC per call and paid before the answer, never after.",
+    "Harm Shield: a spec that asks for a breach of the Five Laws is refused with the law named, and the buyer is not charged.",
+    "Transparency Covenant: the repository, the qualifier transcripts and the tests are public, and every claim about them is reproducible."
+  ],
+  "payment_rails": ["x402", "usdc-base"]
+}
