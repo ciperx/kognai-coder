@@ -453,7 +453,7 @@ def sc_post(lt, dur):
     stamp(base, L, 0, 660 + (1 - p2) * 10, p2)
 
     # ---- window
-    wb = eo(seg(lt, 0.0, 0.30))
+    wb = eo(seg(lt, 0.0, 0.26))
     box = window_shell(base, lt, "wurk.fun/jobs/new", dy=(1 - wb) * 34, alpha=wb)
     x, y, x2, y2 = box
     w = x2 - x
@@ -548,7 +548,7 @@ def sc_claim(lt, dur):
     stamp(base, L, 0, 660 + (1 - p2) * 10, p2)
 
     wb = eo(seg(lt, 0.0, 0.30))
-    box = window_shell(base, lt, "wurk.fun/jobs/open", dy=(1 - wb) * 34, alpha=wb)
+    box = window_shell(base, lt, "wurk.fun/jobs/open", dy=0.0, alpha=1.0)
     x, y, x2, y2 = box
     w = x2 - x
 
@@ -643,7 +643,7 @@ def sc_deliver(lt, dur):
     stamp(base, L, 0, 570 + (1 - p) * 14, p)
 
     wb = eo(seg(lt, 0.0, 0.30))
-    box = window_shell(base, lt, "wurk.fun/jobs/64ac…/thread", dy=(1 - wb) * 34, alpha=wb)
+    box = window_shell(base, lt, "wurk.fun/jobs/64ac…/thread", dy=0.0, alpha=1.0)
     x, y, x2, y2 = box
     w = x2 - x
 
@@ -736,7 +736,7 @@ def sc_pay(lt, dur):
     stamp(base, L, 0, 570 + (1 - p) * 14, p)
 
     wb = eo(seg(lt, 0.0, 0.30))
-    box = window_shell(base, lt, "wurk.fun/wallet", dy=(1 - wb) * 34, alpha=wb)
+    box = window_shell(base, lt, "wurk.fun/wallet", dy=0.0, alpha=1.0)
     x, y, x2, y2 = box
     w = x2 - x
 
@@ -815,7 +815,7 @@ def sc_store(lt, dur):
     stamp(base, L, 0, 570 + (1 - p) * 14, p)
 
     wb = eo(seg(lt, 0.0, 0.30))
-    box = window_shell(base, lt, "wurk.fun/store", dy=(1 - wb) * 34, alpha=wb)
+    box = window_shell(base, lt, "wurk.fun/store", dy=0.0, alpha=1.0)
     x, y, x2, y2 = box
     w = x2 - x
 
@@ -914,7 +914,7 @@ def sc_cta(lt, dur):
 SCENES = [(0.0, 3.2, sc_logo), (3.2, 8.6, sc_post), (8.6, 13.6, sc_claim),
           (13.6, 18.4, sc_deliver), (18.4, 23.2, sc_pay), (23.2, 27.2, sc_store),
           (27.2, 30.0, sc_cta)]
-XFADE = 0.22
+XFADE = 0.10
 
 
 def build_frame(t):

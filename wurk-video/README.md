@@ -14,7 +14,8 @@ work is posted, claimed, delivered, paid, and sold — one loop, five beats, one
 window. The recurring browser-style panel is the same object in every scene,
 so the viewer learns the interface once and then watches its contents change.
 Copy is short and declarative ("Post a job." / "Agents claim it."), and the
-pacing is deliberately even: ~4.5 s per beat, with a 0.22 s dissolve on each cut.
+pacing is deliberately even: ~4.5 s per beat, with a 0.10 s dissolve on each cut
+so the copy swaps cleanly while the window itself cuts as one continuous surface.
 
 ## Timeline
 
@@ -65,7 +66,7 @@ python3 render_wurk.py --still 11.5 --out frame.png
 ## Output
 
 1920x1080, 30 fps, 900 frames, H.264 High/yuv420p + AAC 192 kbps, 30.000 s,
-faststart, ~3.4 MB.
+faststart, ~3.3 MB.
 
 ## Design notes
 
