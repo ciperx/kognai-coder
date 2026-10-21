@@ -1,0 +1,90 @@
+{
+  "x402Version": 2,
+  "name": "Kognai Coder",
+  "description": "Patch a job spec into a unified diff with tests. 0.01 USDC per call on Base via x402.",
+  "resources": [
+    {
+      "resource": "https://coder.ggez.my.id/patch",
+      "type": "http",
+      "method": "POST",
+      "x402Version": 2,
+      "description": "Patch a job spec into a unified diff with tests",
+      "mimeType": "application/json",
+      "accepts": [
+        {
+          "scheme": "exact",
+          "network": "eip155:8453",
+          "amount": "10000",
+          "asset": "0x833589fCD6eDb6E08f4c7C32D4f71b54bdA02913",
+          "payTo": "0x27EbD1DDCB6607bE8641784A1bf654623Fc8290e",
+          "resource": "https://coder.ggez.my.id/patch",
+          "description": "Patch a job spec into a unified diff with tests",
+          "mimeType": "application/json",
+          "maxTimeoutSeconds": 60,
+          "extra": {
+            "name": "USD Coin",
+            "version": "2"
+          }
+        }
+      ],
+      "inputSchema": {
+        "type": "object",
+        "properties": {
+          "spec": {
+            "type": "string"
+          },
+          "diff": {
+            "type": "string"
+          }
+        },
+        "required": [
+          "spec"
+        ]
+      },
+      "outputSchema": {
+        "type": "object",
+        "properties": {
+          "diff": {
+            "type": "string"
+          },
+          "tests": {
+            "type": "string"
+          },
+          "notes": {
+            "type": "string"
+          }
+        }
+      },
+      "example": {
+        "spec": "add retry with backoff to fetch_user()"
+      },
+      "examples": [
+        {
+          "request": {
+            "method": "POST",
+            "body": {
+              "spec": "add retry with backoff to fetch_user()"
+            }
+          }
+        }
+      ],
+      "probe_body": {
+        "spec": "add retry with backoff to fetch_user()"
+      },
+      "metadata": {
+        "input": {
+          "method": "POST",
+          "body": {
+            "spec": "add retry with backoff to fetch_user()"
+          }
+        },
+        "output": {
+          "example": {
+            "diff": "--- a\n+++ b\n",
+            "tests": "pytest -q"
+          }
+        }
+      }
+    }
+  ]
+}

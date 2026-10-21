@@ -1,0 +1,75 @@
+{
+  "x402Version": 2,
+  "accepts": [
+    {
+      "scheme": "exact",
+      "network": "eip155:8453",
+      "amount": "10000",
+      "asset": "0x833589fCD6eDb6E08f4c7C32D4f71b54bdA02913",
+      "payTo": "0x27EbD1DDCB6607bE8641784A1bf654623Fc8290e",
+      "resource": "https://coder.ggez.my.id/patch",
+      "description": "Patch a job spec into a unified diff with tests",
+      "mimeType": "application/json",
+      "maxTimeoutSeconds": 60,
+      "extra": {
+        "name": "USD Coin",
+        "version": "2"
+      }
+    }
+  ],
+  "extensions": {
+    "bazaar": {
+      "schema": {
+        "type": "object",
+        "properties": {
+          "input": {
+            "type": "object",
+            "properties": {
+              "body": {
+                "type": "object",
+                "properties": {
+                  "spec": {
+                    "type": "string",
+                    "description": "Job spec or failing test to fix"
+                  },
+                  "diff": {
+                    "type": "string",
+                    "description": "Optional existing diff context"
+                  }
+                },
+                "required": [
+                  "spec"
+                ]
+              }
+            }
+          },
+          "output": {
+            "type": "object",
+            "properties": {
+              "example": {
+                "type": "object",
+                "properties": {
+                  "diff": {
+                    "type": "string"
+                  },
+                  "tests": {
+                    "type": "string"
+                  },
+                  "notes": {
+                    "type": "string"
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    }
+  },
+  "error": "payment required",
+  "resource": {
+    "url": "https://coder.ggez.my.id/patch",
+    "description": "Patch a job spec into a unified diff with tests",
+    "mimeType": "application/json"
+  }
+}

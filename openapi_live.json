@@ -1,0 +1,52 @@
+{
+  "openapi": "3.1.0",
+  "info": {
+    "title": "x402 endpoint live check",
+    "version": "1.0.0",
+    "description": "Kognai Coder: patch a job spec into a unified diff with tests. Pay-per-call via x402 (0.01 USDC on Base).",
+    "contact": { "email": "ops@maxxspace.com" }
+  },
+  "x-agentcash-guidance": {
+    "llmsTxtUrl": "https://coder.ggez.my.id/llms.txt"
+  },
+  "paths": {
+    "/patch": {
+      "post": {
+        "summary": "Patch a job spec into a unified diff with tests",
+        "description": "Send a job spec or failing test description; receive a unified diff plus test notes. Charged per call: 0.01 USDC on Base mainnet via x402 (scheme exact, asset 0x833589fCD6eDb6E08f4c7C32D4f71b54bdA02913, payTo 0x27EbD1DDCB6607bE8641784A1bf654623Fc8290e). An unpaid request returns HTTP 402 with the machine-readable x402 challenge in the body.",
+        "operationId": "createPatch",
+        "security": [],
+        "x-payment-info": {
+          "price": { "mode": "fixed", "currency": "USD", "amount": "0.01" },
+          "protocols": [{ "x402": {} }]
+        },
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "diff": { "type": "string", "description": "Existing diff context, optional." },
+                  "spec": { "type": "string", "description": "Job spec, failing test, or desired change." },
+                  "repo": { "type": "string", "description": "Optional repository or file path hint." }
+                },
+                "additionalProperties": true
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Patch result",
+            "content": { "application/json": { "schema": { "type": "object" } } }
+          },
+          "402": {
+            "description": "Payment Required - x402 v1 challenge in body",
+            "content": { "application/json": { "schema": { "type": "object" } } }
+          }
+        }
+      }
+    }
+  }
+}

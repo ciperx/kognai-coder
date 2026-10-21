@@ -1122,9 +1122,11 @@ def build_patch(spec, target=None):
 
     test_names = [t.format(target=func) for t in INTENT_TESTS.get(primary, INTENT_TESTS["errors"])]
     helper_label = HELPER_LABEL_PY.get(primary, primary) if py else HELPER_LABEL_TS.get(primary, primary)
-    why = [INTENT_RATIONALE.get(primary, INTENT_RATIONALE["errors"]).format(helper=helper_label, status="status")]
+    # NOTE: templates carry literal braces (e.g. "{status, message}"), so use a
+    # plain replace for {helper}; str.format() would raise KeyError on those.
+    why = [INTENT_RATIONALE.get(primary, INTENT_RATIONALE["errors"]).replace("{helper}", helper_label)]
     for extra in intents[1:4]:
-        why.append("secondary signal in the spec: " + INTENT_RATIONALE.get(extra, "").format(helper=helper_label, status="status"))
+        why.append("secondary signal in the spec: " + INTENT_RATIONALE.get(extra, "").replace("{helper}", helper_label))
     rationale = (
         "Spec parsed as a %s change to `%s` (%s). %s. "
         "The diff adds one self-contained helper block plus the call-site rewrite, keeps existing imports, "

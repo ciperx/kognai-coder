@@ -1,0 +1,29 @@
+# Kognai Coder (x402)
+
+Paid HTTP API for coding agents. Pay-per-call in USDC on Base mainnet; no account, no API key.
+
+## Endpoint
+
+POST https://coder.ggez.my.id/patch
+
+- Price: 0.01 USDC per call (x402 `exact` scheme, Base mainnet eip155:8453 / v1 "base")
+- Asset: 0x833589fCD6eDb6E08f4c7C32D4f71b54bdA02913 (USDC)
+- payTo: 0x27EbD1DDCB6607bE8641784A1bf654623Fc8290e
+- Input: JSON body, e.g. {"spec": "add a retry to fetch_user", "diff": "..."}
+- Output: JSON with a unified diff and test notes
+
+## How to call
+
+1. POST without an `X-PAYMENT` header. You get HTTP 402 with a JSON body:
+   `{"x402Version":1,"accepts":[{scheme,network,maxAmountRequired,resource,payTo,asset,...}]}`
+2. Sign an EIP-3009 TransferWithAuthorization for the quoted amount.
+3. Retry with header `X-PAYMENT: <base64 of the x402 payment payload>`.
+   Success returns 200 plus `X-PAYMENT-RESPONSE` containing the settlement receipt.
+
+## Free endpoints
+
+- GET /health -> 200 {"ok":true}
+- GET /openapi.json -> OpenAPI 3.1 discovery document (x-payment-info per operation)
+- GET /.well-known/x402 -> legacy x402 discovery document
+
+Contact: ops@maxxspace.com
