@@ -1,0 +1,87 @@
+{
+  "openapi": "3.1.0",
+  "info": {
+    "title": "Kognai Coder — spec to patch",
+    "version": "1.1.0",
+    "description": "Kognai Coder: turn a natural-language job spec into a unified-diff-like patch, a rationale, and suggested test names. Deterministic template/heuristic engine (no LLM). Pay-per-call via x402 (0.01 USDC on Base).",
+    "contact": { "email": "ops@maxxspace.com" }
+  },
+  "x-agentcash-guidance": {
+    "llmsTxtUrl": "https://coder.ggez.my.id/llms.txt"
+  },
+  "servers": [{ "url": "https://coder.ggez.my.id" }],
+  "paths": {
+    "/health": {
+      "get": {
+        "summary": "Liveness probe (free)",
+        "operationId": "health",
+        "responses": { "200": { "description": "Service is up", "content": { "application/json": { "schema": { "type": "object" } } } } }
+      }
+    },
+    "/patch": {
+      "post": {
+        "summary": "Patch a job spec into a unified diff with tests",
+        "description": "Send a job spec or failing-test description; receive {patch, rationale, tests, applied}. Charged per call: 0.01 USDC on Base mainnet via x402 (scheme exact, asset 0x833589fCD6eDb6E08f4c7C32D4f71b54bdA02913, payTo 0x27EbD1DDCB6607bE8641784A1bf654623Fc8290e). An unpaid request returns HTTP 402 with the machine-readable x402 v2 challenge in the body and PAYMENT-REQUIRED header. Add ?dry=1 to preview the generated patch for free (unpaid sample mode).",
+        "operationId": "createPatch",
+        "security": [],
+        "x-payment-info": {
+          "price": { "mode": "fixed", "currency": "USD", "amount": "0.01" },
+          "protocols": [{ "x402": {} }]
+        },
+        "parameters": [
+          {
+            "name": "dry",
+            "in": "query",
+            "required": false,
+            "description": "1/true returns the generated patch without payment (preview mode).",
+            "schema": { "type": "string", "enum": ["1", "true"] }
+          }
+        ],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "spec": { "type": "string", "description": "Job spec, failing test, or desired change, e.g. 'add retry with exponential backoff to fetchUser'." },
+                  "target": { "type": "string", "description": "Optional file path hint, e.g. 'src/api/user.ts' or 'app/users.py'; the extension selects TypeScript vs Python." },
+                  "diff": { "type": "string", "description": "Existing diff context, optional." },
+                  "repo": { "type": "string", "description": "Optional repository hint." }
+                },
+                "required": ["spec"],
+                "additionalProperties": true
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Patch result",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "patch": { "type": "string", "description": "Unified-diff-like text with + and - lines." },
+                    "rationale": { "type": "string", "description": "Why the change is shaped this way." },
+                    "tests": { "type": "array", "items": { "type": "string" }, "description": "Suggested test names." },
+                    "applied": { "type": "boolean", "description": "Always false: the diff is returned, never applied." },
+                    "language": { "type": "string", "enum": ["typescript", "python"] },
+                    "target": { "type": "string" },
+                    "engine": { "type": "string" }
+                  },
+                  "required": ["patch", "rationale", "tests", "applied"]
+                }
+              }
+            }
+          },
+          "402": {
+            "description": "Payment Required — x402 v2 challenge in body and PAYMENT-REQUIRED header",
+            "content": { "application/json": { "schema": { "type": "object" } } }
+          }
+        }
+      }
+    }
+  }
+}
