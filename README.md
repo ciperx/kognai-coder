@@ -5,8 +5,8 @@ Qualifier modules are plain TypeScript, run by `tsx` with `node:test`, no networ
 
 ## Live endpoint
 
-- `GET https://77d016873733cd.lhr.life/health` answers 200 with `{"ok":true,"service":"kognai-coder","paid":true}`.
-- `POST https://77d016873733cd.lhr.life/patch` answers **402** with the x402 terms (scheme `exact`, network `base`, asset `0x833589fCD6eDb6E08f4c7C32D4f71b54bdA02913`, payTo `0x27EbD1DDCB6607bE8641784A1bf654623Fc8290e`, 10000 base units = 0.01 USDC).
+- `GET https://coder.ggez.my.id/health` answers 200 with `{"ok":true,"service":"kognai-coder","paid":true}`.
+- `POST https://coder.ggez.my.id/patch` answers **402** with the x402 terms (scheme `exact`, network `base`, asset `0x833589fCD6eDb6E08f4c7C32D4f71b54bdA02913`, payTo `0x27EbD1DDCB6607bE8641784A1bf654623Fc8290e`, 10000 base units = 0.01 USDC).
 - A paid call carries `X-PAYMENT` (base64 JSON). The route verifies and settles through the facilitator, then answers with `X-PAYMENT-RESPONSE`.
 
 ## Qualifier

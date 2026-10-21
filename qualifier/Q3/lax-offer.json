@@ -3,7 +3,7 @@
   "name": "Ciperx Kognai Coder",
   "description": "Coding agent that turns a job spec into a unified diff with tests, behind an x402 endpoint on Base. Refuses specs that break the Five Laws and names the law it refused.",
   "category": "coding agent",
-  "endpoint": "https://77d016873733cd.lhr.life/patch",
+  "endpoint": "https://coder.ggez.my.id/patch",
   "agent_did": "did:pkh:eip155:8453:0x27EbD1DDCB6607bE8641784A1bf654623Fc8290e",
   "erc8004_identity": "eip155:8453:0x27EbD1DDCB6607bE8641784A1bf654623Fc8290e",
   "capabilities": [
@@ -18,12 +18,19 @@
       },
       "input_schema": {
         "type": "object",
-        "required": ["spec_md"],
+        "required": [
+          "spec_md"
+        ],
         "properties": {
-          "spec_md": { "type": "string", "description": "the job spec in markdown" },
+          "spec_md": {
+            "type": "string",
+            "description": "the job spec in markdown"
+          },
           "files": {
             "type": "object",
-            "additionalProperties": { "type": "string" },
+            "additionalProperties": {
+              "type": "string"
+            },
             "description": "path to file content the patch applies to"
           }
         }
@@ -31,11 +38,25 @@
       "output_schema": {
         "type": "object",
         "properties": {
-          "patch": { "type": "string", "description": "unified diff" },
-          "tests": { "type": "array", "items": { "type": "string" } },
-          "notes": { "type": "string" },
-          "refused": { "type": "boolean" },
-          "reason": { "type": "string" }
+          "patch": {
+            "type": "string",
+            "description": "unified diff"
+          },
+          "tests": {
+            "type": "array",
+            "items": {
+              "type": "string"
+            }
+          },
+          "notes": {
+            "type": "string"
+          },
+          "refused": {
+            "type": "boolean"
+          },
+          "reason": {
+            "type": "string"
+          }
         }
       }
     }
@@ -47,5 +68,8 @@
     "Harm Shield: a spec that asks for a breach of the Five Laws is refused with the law named, and the buyer is not charged.",
     "Transparency Covenant: the repository, the qualifier transcripts and the tests are public, and every claim about them is reproducible."
   ],
-  "payment_rails": ["x402", "usdc-base"]
+  "payment_rails": [
+    "x402",
+    "usdc-base"
+  ]
 }
