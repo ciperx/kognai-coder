@@ -1,0 +1,22 @@
+{
+  "tx": "0xb907e797eee08db15633e0ca2b1541894d2ccba49bf6d4fcb9bd2c7430b962b0",
+  "block": 52258475,
+  "poidh_v3": "0x5555fa783936c260f77385b4e153b9725fef1719",
+  "paid_to_claimer": true,
+  "events": [
+    {
+      "bounty_id": 464,
+      "claim_id": 3134,
+      "issuer": "0xa21e61165a97cba8e02558ece645da45ae4eaf0a",
+      "claimer": "0xad4b40d1e7c98778e4555207a37b8d75fde4f9b6",
+      "gross_wei": 1880000000000000,
+      "net_wei": 1833000000000000,
+      "fee_wei": 47000000000000,
+      "gross_eth": 0.00188,
+      "net_eth": 0.001833,
+      "fee_matches_2_5pct": true,
+      "net_plus_fee_equals_gross": true
+    }
+  ],
+  "withdrawable_now_wei": 0
+}
