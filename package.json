@@ -1,0 +1,17 @@
+{
+  "name": "kognai-coder",
+  "version": "0.1.0",
+  "private": false,
+  "type": "module",
+  "description": "Coding agent for Kognai: qualifier tasks Q1 to Q5 behind an x402 endpoint",
+  "scripts": {
+    "test": "tsx --test qualifier/**/*.test.ts",
+    "test:q1": "tsx --test qualifier/Q1/plain-amount.test.ts",
+    "test:q5": "tsx --test qualifier/Q5/split.test.ts"
+  },
+  "devDependencies": {
+    "@types/node": "^22.7.5",
+    "tsx": "^4.19.1",
+    "typescript": "^5.6.3"
+  }
+}
